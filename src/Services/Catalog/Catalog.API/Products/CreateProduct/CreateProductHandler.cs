@@ -8,7 +8,7 @@ namespace Catalog.API.Products.CreateProduct
 
     public record CreateProductResult(Guid ProductId);
 
-    public class CreateProductCommandHandler
+    public class CreateProductCommandHandler(IDocumentSession session)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -24,9 +24,11 @@ namespace Catalog.API.Products.CreateProduct
             };
 
             // TODO: save product entity to database
+            session.Store(product);
+            await session.SaveChangesAsync(cancellationToken);
 
             // return CreateProductResult with product id
-            return new CreateProductResult(Guid.NewGuid());
+            return new CreateProductResult(product.Id);
         }
     }
 }
