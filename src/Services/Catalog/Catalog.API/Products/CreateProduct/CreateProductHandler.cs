@@ -26,7 +26,7 @@
             var product = new Product
             {
                 Name = command.Name,
-                Catagory = command.Catagory,
+                Category = command.Catagory,
                 Description = command.Description,
                 ImageFile = command.ImageFile,
                 Price = command.Price

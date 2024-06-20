@@ -34,7 +34,7 @@
 
 
             product.Name = command.Name;
-            product.Catagory = command.Catagory;
+            product.Category = command.Catagory;
             product.Description = command.Description;
             product.ImageFile = command.ImageFile;
             product.Price = command.Price;
