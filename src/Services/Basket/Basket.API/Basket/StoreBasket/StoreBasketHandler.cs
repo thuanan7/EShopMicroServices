@@ -1,6 +1,6 @@
 ﻿namespace Basket.API.Basket.StoreBasket
 {
-    public record struct StoreBasketCommand(string UserName, ShoppingCart Cart) 
+    public record struct StoreBasketCommand(ShoppingCart Cart) 
         : ICommand<StoreBasketResult>;
     public record struct StoreBasketResult(string UserName);
 
@@ -23,7 +23,7 @@
             //TODO: store basket in database (use Marten upsert)
             //TODO: update cache
 
-            return new StoreBasketResult(command.UserName);
+            return new StoreBasketResult(command.Cart.UserName);
         }
     }
 }
