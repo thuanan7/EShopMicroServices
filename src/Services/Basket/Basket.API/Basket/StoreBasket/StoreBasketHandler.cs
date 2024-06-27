@@ -23,7 +23,6 @@ namespace Basket.API.Basket.StoreBasket
             ShoppingCart cart = command.Cart;
 
             await repository.StoreBasketAsync(cart, cancellationToken);
-            //TODO: update cache
 
             return new StoreBasketResult(command.Cart.UserName);
         }
