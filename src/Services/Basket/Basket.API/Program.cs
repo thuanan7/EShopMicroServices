@@ -39,7 +39,16 @@ builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o =>
 {
     o.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
-});
+})
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler()
+        {
+            ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+        return handler;
+    });
 
 
 // Cross-Cutting Concerns
